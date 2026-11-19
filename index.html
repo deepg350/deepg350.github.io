@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Gurdeep APK</title>
+<style>
+body{font-family:sans-serif;background:#0f1320;color:#e8ebf4;margin:0;padding:20px}
+h1{text-align:center}
+.app{background:#181d2e;border-radius:12px;padding:16px;margin:12px auto;max-width:600px;display:flex;justify-content:space-between;align-items:center}
+a{background:#4f5dff;color:#fff;padding:10px 18px;border-radius:8px;text-decoration:none}
+</style>
+</head>
+<body>
+<h1>📱 Gurdeep APK Downloads</h1>
+<div id="list">Loading...</div>
+<script>
+fetch('https://api.github.com/repos/deepg350/deepg350.github.io/contents/apk')
+.then(r=>r.json()).then(files=>{
+  const apks=files.filter(f=>f.name.endsWith('.apk'));
+  document.getElementById('list').innerHTML=apks.length?apks.map(f=>
+  `<div class="app"><span>${f.name}<br><small>${(f.size/1048576).toFixed(1)} MB</small></span><a href="apk/${f.name}" download>Download</a></div>`).join(''):'No APK yet';
+}).catch(()=>document.getElementById('list').innerHTML='No APK yet');
+</script>
+</body>
+</html>
